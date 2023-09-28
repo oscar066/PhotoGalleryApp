@@ -43,6 +43,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
 
+    // UI dependencies
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
@@ -51,6 +52,7 @@ dependencies {
     // Networking dependencies
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.retrofit2:converter-scalar:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
