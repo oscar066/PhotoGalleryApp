@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
-    //id("com.google.devtools.ksp")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -59,7 +58,7 @@ dependencies {
 
     //Moshi dependencies
     implementation("com.squareup.moshi:moshi:1.14.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("io.coil-kt:coil:2.0.0-rc02")
 
