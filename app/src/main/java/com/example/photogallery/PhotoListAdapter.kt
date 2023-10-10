@@ -30,5 +30,4 @@ class PhotoListAdapter (
     }
 
     override fun getItemCount() = galleryItems.size
-
 }
