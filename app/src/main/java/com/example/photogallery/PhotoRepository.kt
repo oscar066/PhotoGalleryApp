@@ -32,9 +32,7 @@ class PhotoRepository {
         flickrApi.fetchPhotos().photos.galleryItems
 
     // trying the search
-    suspend fun searchPhotos(query: String): List<GalleryItem>{
-        val response = flickrApi.searchPhotos(query)
-        return response.photos.galleryItems
-    }
+    suspend fun searchPhotos(query: String): List<GalleryItem> =
+        flickrApi.searchPhotos(query).photos.galleryItems
 
 }
