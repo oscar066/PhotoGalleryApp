@@ -16,8 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.photogallery.databinding.FragmentPhotoGalleryBinding
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import retrofit2.http.Query
 
 private const val TAG = "PhotoGalleryFragment"
 
@@ -27,6 +27,8 @@ class PhotoGalleryFragment : Fragment() {
             get() = checkNotNull(_binding) {
                 "Cannot access binding because it is null. Is the view visible?"
             }
+
+    private var searchView: SearchView? = null
 
     private val photoGalleryViewModel: PhotoGalleryViewModel by viewModels()
 
@@ -50,13 +52,13 @@ class PhotoGalleryFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                photoGalleryViewModel.galleryItems.collect{ items ->
-                    binding.photoGrid.adapter = PhotoListAdapter(items)
+                photoGalleryViewModel.uiState.collect { state ->
+                    binding.photoGrid.adapter = PhotoListAdapter(state.images)
+                    searchView?.setQuery(state.query, false )
                 }
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -67,7 +69,8 @@ class PhotoGalleryFragment : Fragment() {
         inflater.inflate(R.menu.fragment_photo_gallery, menu)
 
         val searchItem : MenuItem = menu.findItem(R.id.menu_item_search)
-        val searchView = searchItem.actionView as? SearchView
+        searchView = searchItem.actionView as? SearchView
+        //pollingMenuItem = menu.findItem(R.id.menu_item_toggle_polling)
 
         searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -81,5 +84,20 @@ class PhotoGalleryFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    fun onOptionsItemsSelected(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.menu_item_clear -> {
+                photoGalleryViewModel.setQuery("")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onDestroyOptionsMenu() {
+        super.onDestroyOptionsMenu()
+        searchView = null
     }
 }
