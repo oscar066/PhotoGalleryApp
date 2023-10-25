@@ -17,22 +17,22 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.photogallery.databinding.FragmentPhotoGalleryBinding
 import kotlinx.coroutines.launch
-import retrofit2.http.Query
 
 private const val TAG = "PhotoGalleryFragment"
 
 class PhotoGalleryFragment : Fragment() {
     private var _binding: FragmentPhotoGalleryBinding? = null
     private val binding
-            get() = checkNotNull(_binding) {
-                "Cannot access binding because it is null. Is the view visible?"
-            }
+        get() = checkNotNull(_binding) {
+            "Cannot access binding because it is null. Is the view visible?"
+        }
 
     private val photoGalleryViewModel: PhotoGalleryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -49,8 +49,8 @@ class PhotoGalleryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                photoGalleryViewModel.galleryItems.collect{ items ->
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                photoGalleryViewModel.galleryItems.collect { items ->
                     binding.photoGrid.adapter = PhotoListAdapter(items)
                 }
             }
@@ -66,10 +66,10 @@ class PhotoGalleryFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.fragment_photo_gallery, menu)
 
-        val searchItem : MenuItem = menu.findItem(R.id.menu_item_search)
+        val searchItem: MenuItem = menu.findItem(R.id.menu_item_search)
         val searchView = searchItem.actionView as? SearchView
 
-        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d(TAG, "QueryTextSubmit: $query")
                 photoGalleryViewModel.setQuery(query ?: "")
