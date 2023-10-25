@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.photogallery.databinding.FragmentPhotoGalleryBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "PhotoGalleryFragment"
@@ -34,7 +33,7 @@ class PhotoGalleryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+         setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -64,6 +63,7 @@ class PhotoGalleryFragment : Fragment() {
         _binding = null
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.fragment_photo_gallery, menu)
@@ -85,6 +85,7 @@ class PhotoGalleryFragment : Fragment() {
             }
         })
     }
+
 
     fun onOptionsItemsSelected(item: MenuItem) : Boolean {
         return when (item.itemId) {
