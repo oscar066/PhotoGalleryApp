@@ -33,6 +33,7 @@ class PreferencesRepository private constructor (
                 val dataStore = PreferenceDataStoreFactory.create {
                     context.preferencesDataStoreFile("settings")
                 }
+                INSTANCE = PreferencesRepository(dataStore)
             }
         }
 
