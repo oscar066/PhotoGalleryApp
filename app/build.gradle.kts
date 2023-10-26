@@ -64,6 +64,9 @@ dependencies {
     // coil dependency
     implementation("io.coil-kt:coil:2.0.0-rc02")
 
+    // Work Manager dependency
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+
     // datastore dependencies
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
