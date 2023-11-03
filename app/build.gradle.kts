@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -60,6 +61,10 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.14.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    // Navigation dependencies
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
 
     // coil dependency
     implementation("io.coil-kt:coil:2.0.0-rc02")
